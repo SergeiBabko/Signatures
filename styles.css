@@ -1,0 +1,263 @@
+:root {
+  --font-size-primary: 2em;
+  --font-size-secondary: 1em;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  user-select: none;
+  font-family: Roboto, sans-serif;
+}
+
+* {
+  position: relative;
+  box-sizing: border-box;
+}
+
+#root {
+  font-size: 10vh;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 1;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3C3A3D;
+  transition: 1s ease-in-out opacity;
+}
+
+.spinner.destroyed {
+  opacity: 0;
+}
+
+.spinner.destroyed .waves {
+  width: 100%;
+}
+
+.spinner .waves {
+  width: 100px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 1s ease-in-out width;
+}
+
+.spinner .waves .wave {
+  opacity: 0.3;
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 25%;
+}
+
+.spinner .waves .wave .wave-color {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: #F3F1ED;
+}
+
+.signature {
+  display: flex;
+  overflow: hidden;
+  font-weight: 300;
+  border-radius: 6px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  animation: zoomIn 0.5s ease-in-out forwards;
+  transition: 1s ease-in-out border-radius, box-shadow;
+}
+
+.signature .signature-background,
+.signature .signature-foreground {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.signature .signature-header {
+  height: 100%;
+  padding: 1.5em;
+  aspect-ratio: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature .signature-header .header-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.signature .signature-header .header-image:after, .signature .signature-header .header-image:before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: inherit;
+  border-radius: inherit;
+}
+
+.signature .signature-header .header-image:before {
+  top: -70%;
+  content: "";
+  opacity: 0.3;
+  filter: blur(50px);
+  transform: scale(1.5);
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+.signature .signature-header .header-image:after {
+  border: 0.2em solid;
+  border-color: inherit;
+}
+
+.signature .signature-header .waves {
+  left: -50%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transform: scale(2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signature .signature-header .waves .wave {
+  opacity: 0.3;
+  display: flex;
+  position: absolute;
+  border-radius: 40%;
+}
+
+.signature .signature-header .waves .wave .wave-color {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.signature .signature-body {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  padding: 0 1.5em;
+  align-items: start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.signature .signature-body .body-name-wrapper .body-title {
+  font-size: var(--font-size-primary);
+}
+
+.signature .signature-body .body-name-wrapper .body-subtitle {
+  font-size: var(--font-size-secondary);
+}
+
+.signature .signature-body .body-icons {
+  display: flex;
+  align-items: center;
+  gap: var(--font-size-primary);
+  font-size: var(--font-size-secondary);
+}
+
+.signature .signature-body .body-icons .icon {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  gap: calc(var(--font-size-secondary) / 2);
+}
+
+.signature .signature-body .body-icons .icon i {
+  aspect-ratio: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--font-size-secondary);
+}
+
+.signature .signature-body .body-about {
+  font-size: var(--font-size-secondary);
+}
+
+@keyframes drift {
+  from {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-height: 199px) {
+  #root {
+    background-color: unset !important;
+  }
+}
+
+@media (min-height: 200px) {
+  #root {
+    font-size: 20px;
+  }
+
+  .signature {
+    width: auto;
+    height: 200px;
+    min-width: 400px;
+    max-width: 720px;
+    border-radius: 16px;
+    box-shadow: rgba(14, 63, 126, 0.06) 0px 0px 0px 1px, rgba(42, 51, 70, 0.03) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 2px 2px -1px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.03) 0px 5px 5px -2.5px, rgba(42, 51, 70, 0.03) 0px 10px 10px -5px, rgba(42, 51, 70, 0.03) 0px 24px 24px -8px;
+  }
+}
