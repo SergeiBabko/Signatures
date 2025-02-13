@@ -111,10 +111,9 @@ export class Signature {
   #createBodyIcons() {
     if (!this.params.icons) return;
     try {
-      const icons = JSON.parse(this.params.icons);
       const bodyIcons = document.createElement('div');
       bodyIcons.className = 'body-icons';
-      this.#prepareIcons(bodyIcons, icons);
+      this.#prepareIcons(bodyIcons, this.params.icons);
       return bodyIcons;
     } catch (r) {
       return;

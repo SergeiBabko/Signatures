@@ -4,6 +4,10 @@ import { Spinner } from './spinner.mjs';
 
 import * as Utils from './utils.mjs';
 
+/*
+* Icons example:
+* Ko-Fi|fa-solid fa-mug-saucer|https://ko-fi.com/segich;
+*/
 new class Main {
   DEFAULT_PARAMETERS = {
     waves: 3,
@@ -11,7 +15,15 @@ new class Main {
     title: 'SEGICH',
     subtitle: 'A software wizard by day, a creative explorer by night',
     image: 'https://picsum.photos/1000',
-    icons: '[{"title":"Ko-Fi","icon":"fa-solid fa-mug-saucer","url":"https://ko-fi.com/segich"},{"title":"Buy Me a Coffee","icon":"fa-solid fa-mug-saucer","url":"https://buymeacoffee.com/segich"}]'
+    icons: [{
+      title: 'Ko-Fi',
+      icon: 'fa-solid fa-mug-saucer',
+      url: 'https://ko-fi.com/segich',
+    }, {
+      title: 'Buy Me a Coffee',
+      icon: 'fa-solid fa-mug-saucer',
+      url: 'https://buymeacoffee.com/segich',
+    }]
   };
 
   constructor() {
@@ -35,7 +47,21 @@ new class Main {
 
   getParameters() {
     const urlParams = new URLSearchParams(window.location.search);
-    return { ...this.DEFAULT_PARAMETERS, ...Object.fromEntries(urlParams) };
+    const params = Object.fromEntries(urlParams);
+    this.prepareIcons(params);
+    return { ...this.DEFAULT_PARAMETERS, ...params };
+  }
+
+  prepareIcons(params) {
+    if (!params.icons) return;
+    params.icons = params.icons.split(';').map(textIcon => {
+      const iconProps = textIcon.split('|');
+      return {
+        title: iconProps[0],
+        icon: iconProps[1],
+        url: iconProps[2],
+      };
+    });
   }
 
   async getColors() {
